@@ -11,6 +11,7 @@ import { TorusConnector } from '@web3-react/torus-connector'
 import { TrezorConnector } from '@web3-react/trezor-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
+import { SubWalletConnector } from '@subwallet/web3-react-subwallet-connector-v6';
 
 const POLLING_INTERVAL = 12000
 const RPC_URLS: { [chainId: number]: string } = {
@@ -18,7 +19,8 @@ const RPC_URLS: { [chainId: number]: string } = {
   4: process.env.RPC_URL_4 as string
 }
 
-export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
+export const injected = new InjectedConnector({ supportedChainIds: [1, 1287, 1284, 1285, 592, 336] })
+export const subWallet = new SubWalletConnector({ supportedChainIds: [1, 1287, 1284, 1285, 592, 336] })
 
 export const network = new NetworkConnector({
   urls: { 1: RPC_URLS[1], 4: RPC_URLS[4] },

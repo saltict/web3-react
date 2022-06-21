@@ -11,6 +11,7 @@ import { formatEther } from '@ethersproject/units'
 
 import { useEagerConnect, useInactiveListener } from '../hooks'
 import {
+  subWallet,
   injected,
   network,
   walletconnect,
@@ -29,6 +30,7 @@ import { Spinner } from '../components/Spinner'
 
 enum ConnectorNames {
   Injected = 'Injected',
+  SubWallet = 'SubWallet',
   Network = 'Network',
   WalletConnect = 'WalletConnect',
   WalletLink = 'WalletLink',
@@ -44,6 +46,7 @@ enum ConnectorNames {
 }
 
 const connectorsByName: { [connectorName in ConnectorNames]: any } = {
+  [ConnectorNames.SubWallet]: subWallet,
   [ConnectorNames.Injected]: injected,
   [ConnectorNames.Network]: network,
   [ConnectorNames.WalletConnect]: walletconnect,

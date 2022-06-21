@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
-import { injected } from './connectors'
+import { subWallet } from './connectors'
 
 export function useEagerConnect() {
   const { activate, active } = useWeb3React()
@@ -9,9 +9,9 @@ export function useEagerConnect() {
   const [tried, setTried] = useState(false)
 
   useEffect(() => {
-    injected.isAuthorized().then((isAuthorized: boolean) => {
+    subWallet.isAuthorized().then((isAuthorized: boolean) => {
       if (isAuthorized) {
-        activate(injected, undefined, true).catch(() => {
+        activate(subWallet, undefined, true).catch(() => {
           setTried(true)
         })
       } else {
@@ -38,21 +38,21 @@ export function useInactiveListener(suppress: boolean = false) {
     if (ethereum && ethereum.on && !active && !error && !suppress) {
       const handleConnect = () => {
         console.log("Handling 'connect' event")
-        activate(injected)
+        activate(subWallet)
       }
       const handleChainChanged = (chainId: string | number) => {
         console.log("Handling 'chainChanged' event with payload", chainId)
-        activate(injected)
+        activate(subWallet)
       }
       const handleAccountsChanged = (accounts: string[]) => {
         console.log("Handling 'accountsChanged' event with payload", accounts)
         if (accounts.length > 0) {
-          activate(injected)
+          activate(subWallet)
         }
       }
       const handleNetworkChanged = (networkId: string | number) => {
         console.log("Handling 'networkChanged' event with payload", networkId)
-        activate(injected)
+        activate(subWallet)
       }
 
       ethereum.on('connect', handleConnect)
